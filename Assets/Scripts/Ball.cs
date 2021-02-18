@@ -30,7 +30,10 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        GetComponent<AudioSource>().Play();
+        if (inPlay == true)
+        {
+            GetComponent<AudioSource>().Play();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

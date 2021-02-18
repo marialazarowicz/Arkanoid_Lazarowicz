@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Paddle : MonoBehaviour
 {
-    [SerializeField] float speed;
-    [SerializeField] float minPos;
-    [SerializeField] float maxPos;
+    [SerializeField] float speed = 9f;
+    [SerializeField] float minPos = -6.5f;
+    [SerializeField] float maxPos = 6.5f;
 
 
     // Update is called once per frame
