@@ -4,31 +4,40 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    bool hasStarted = false;
-    [SerializeField] float pushUp = 10f;
+    public Transform paddle;
+    public bool inPlay = false;
+    [SerializeField] float pushUp = 9f;
+    [SerializeField] float pushRight = 2f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        if(!hasStarted)
+        if(!inPlay)
         {
-            launchOnEnter();
+            transform.position = paddle.position;
+            LaunchOnSpace();
         }
         
     }
 
-    private void launchOnEnter()
+    private void LaunchOnSpace()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Space))
             {
-            hasStarted = true;
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, pushUp);
+            inPlay = true;
+            GetComponent<Rigidbody2D>().velocity = new Vector2(pushRight, pushUp);
             }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        GetComponent<AudioSource>().Play();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("bottom"))
+        {
+            inPlay = false;
+        }
     }
 }
